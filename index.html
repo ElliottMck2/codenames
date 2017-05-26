@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Coder Ganster Name Generator</title>
+    <title>Coder Gangster Name Generator</title>
     <link href="https://fonts.googleapis.com/css?family=Creepster|Roboto" rel="stylesheet">
     <style>
         body {
@@ -14,6 +15,7 @@
             text-align: center;
             background-color: #08b9f5;
         }
+
         h1 {
             display: inline-block;
             padding: .5em;
@@ -23,6 +25,7 @@
             -webkit-transform: rotate(-2deg); /* Chrome, Safari, Opera */
             transform: rotate(-2deg);
         }
+
         p {
             margin: 0 0 0.25em;
             font-family: "Creepster", cursive;
@@ -31,8 +34,10 @@
         }
 
         button {
-            display: inline-block;
-            padding: 15px 32px;
+            position: absolute;
+            width: 14%;
+            padding: 2% 4%;
+            left: 43%;
             background-color: #f3548a;
             border: none;
             color: #fff;
@@ -41,18 +46,27 @@
             font-size: 16px;
             font-family: 'Roboto', sans-serif;
         }
+
     </style>
 </head>
 <body>
 <h1>Gangster Coder Name Generator</h1>
 <p id="message">What's your name?</p>
-<button onclick="createMessage()">GENERATE</button>
+<button id="generate" onclick="turnOn()">GENERATE</button>
+<button id="stop" onclick="turnOff()">STOP</button>
+
 <script>
     var firstNames = [],
-        secondNames = [];
+        secondNames = [],
+        display1 = setInterval(function () {
+            createMessage()
+        }, 100),
+        display2;
 
-    firstNames = ['Little', 'Heavy', 'Big', 'Total', 'Howling', 'Erronious', 'Main', 'Double', 'Random', 'Fuzzy', 'Null', 'Bad', 'Noisy', 'Nasty', 'The', 'Hot', 'Dangerous', 'Ugly', 'Trojan', 'Wrigglin\'', 'Angry', 'Short', 'Primary', 'Mad', 'Crazy', 'Hyper', 'Red', 'Tough', 'Gooey'];
-    secondNames = ['Syntax', 'Mouse', 'Java', 'Progress', 'Indent', 'Terminal', 'Entry Point', 'Bug', 'Integer', 'String', 'Click', 'Code', 'Logic', 'Pointer', 'Function', 'Control', 'Key', 'Shift', 'Shell', 'Virus', 'Worm', 'Minus', 'Operator', 'Exception', 'Number', 'Dev', 'Server', 'Client', 'Repo', 'Markup', 'Push', 'Pull', 'Conflict', 'Interface', 'Thread', 'Conversion', 'Sum'];
+    firstNames = ['Little', 'Heavy', 'Big', 'Total', 'Howling', 'Erronious', 'Main', 'Double', 'Random', 'Fuzzy', 'Null', 'Bad', 'Noisy', 'Nasty', 'The', 'Hot', 'Dangerous', 'Ugly', 'Trojan', 'Wrigglin\'', 'Angry', 'Short', 'Primary'];
+    secondNames = ['Syntax', 'Mouse', 'Java', 'Progress', 'Indent', 'Terminal', 'Entry Point', 'Bug', 'Integer', 'String', 'Click', 'Code', 'Logic', 'Pointer', 'Function', 'Control', 'Key', 'Shift', 'Shell', 'Virus', 'Worm', 'Minus', 'Operator', 'Exception', 'Number', 'Dev', 'Server', 'Client'];
+
+    document.getElementById("generate").style.visibility = "hidden";
 
     function getRandomItem(array) {
         var rnd = Math.floor(Math.random() * array.length);
@@ -61,13 +75,30 @@
 
     function generateName() {
         var firstName = getRandomItem(firstNames),
-            secondName =  getRandomItem(secondNames);
+            secondName = getRandomItem(secondNames);
         return firstName + ' ' + secondName;
     }
 
     function createMessage() {
         document.getElementById('message').innerHTML = generateName();
     }
+
+    function turnOn() {
+        display2 = setInterval(function () {
+            createMessage()
+        }, 100);
+        document.getElementById("stop").style.visibility = "visible";
+        document.getElementById("generate").style.visibility = "hidden";
+    }
+
+    function turnOff() {
+        window.clearInterval(display1);
+        window.clearInterval(display2);
+        document.getElementById("stop").style.visibility = "hidden";
+        document.getElementById("generate").style.visibility = "visible";
+    }
+
+    //Hello
 </script>
 </body>
 </html>
